@@ -1,4 +1,6 @@
-# symfony-built-in-web-server-with-php-fpm
+# Symfony built-in Web Server with PHP-FPM
+
+By default, Symfony's built-in web server communicates with PHP in the cgi-fcgi SAPI type.
 
 ```
 941596a99898:/app# symfony local:php:list
