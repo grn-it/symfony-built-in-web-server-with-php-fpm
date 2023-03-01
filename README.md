@@ -3,13 +3,13 @@
 By default, Symfony's built-in web server communicates with PHP in the cgi-fcgi SAPI type.
 
 ```
-941596a99898:/app# symfony local:php:list
-+---------+------------+---------+---------------------+-------------+---------+---------+
-| Version | Directory  |   PHP   |         PHP         |     PHP     | Server  | System? |
-|         |            |   CLI   |         FPM         |     CGI     |         |         |
-+---------+------------+---------+---------------------+-------------+---------+---------+
-| 8.1.16  | /usr/local | bin/php | /usr/sbin/php-fpm81 | bin/php-cgi | PHP FPM | *       |
-+---------+------------+---------+---------------------+-------------+---------+---------+
+a59b553b1deb:/app# symfony local:php:list
++---------+------------+---------+--------------+---------+---------+---------+
+| Version | Directory  |   PHP   |     PHP      |   PHP   | Server  | System? |
+|         |            |   CLI   |     FPM      |   CGI   |         |         |
++---------+------------+---------+--------------+---------+---------+---------+
+| 8.2.3   | /usr/local | bin/php | sbin/php-fpm |         | PHP FPM | *       |
++---------+------------+---------+--------------+---------+---------+---------+
 
 The current PHP version is selected from default version in $PATH
 
@@ -19,13 +19,12 @@ If you're using Platform.sh, the version can also be specified in the .platform.
 ```
 
 ```
-941596a99898:/app# ps -a
+a59b553b1deb:/app# ps -a
 PID   USER     TIME  COMMAND
     1 root      0:00 symfony server:start --no-tls
-   17 root      0:00 {php-fpm81} php-fpm: master process (/root/.symfony5/php/0c35eebf403cf91fe77a64921d76aa1ca6411d20/fpm-8.1.16.ini)
-   18 www-data  0:00 {php-fpm81} php-fpm: pool www
-   19 www-data  0:00 {php-fpm81} php-fpm: pool www
+   17 root      0:00 php-fpm: master process (/root/.symfony5/php/0c35eebf403cf91fe77a64921d76aa1ca6411d20/fpm-8.2.3.ini)
+   18 www-data  0:00 php-fpm: pool www
+   19 www-data  0:00 php-fpm: pool www
    20 root      0:00 bash
-   51 root      0:00 ps -a
-
+   44 root      0:00 ps -a
 ```
