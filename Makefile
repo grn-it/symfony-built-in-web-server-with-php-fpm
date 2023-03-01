@@ -33,8 +33,8 @@ fix-permissions:
 	@docker-compose exec symfony-web-application make fix-permissions-commands
 
 fix-permissions-commands:
-	@setfacl -dR -m u:$(id -u www-data):rwX var
-	@setfacl -R -m u:$(id -u www-data):rwX var
+	@setfacl -dR -m u:$$(id -u www-data):rwX var
+	@setfacl -R -m u:$$(id -u www-data):rwX var
 
 build:
 	@docker-compose build --force-rm
