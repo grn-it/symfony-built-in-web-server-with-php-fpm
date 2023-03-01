@@ -1,9 +1,13 @@
 install:
-	docker-compose -f docker-compose.dev.yml build --force-rm
-	docker-compose -f docker-compose.dev.yml up -d
-	docker-compose -f docker-compose.dev.yml exec symfony-web-application make install-symfony uid=$(shell id -u)
-	make down
-	make up
+	@if [ -f docker-compose.dev.yml ]; \
+	then \
+		docker-compose -f docker-compose.dev.yml build --force-rm
+		docker-compose -f docker-compose.dev.yml up -d
+		docker-compose -f docker-compose.dev.yml exec symfony-web-application make install-symfony uid=$(shell id -u)
+		make fix-permissions
+		make down
+		make up
+	fi
 
 install-symfony:
 	@if [ ! -f symfony.lock ]; \
@@ -24,6 +28,13 @@ install-symfony:
 			mv docker-compose.dev.yml docker-compose.yml; \
 		fi \
 	fi
+
+fix-permissions:
+	@docker-compose exec symfony-web-application make fix-permissions-commands
+
+fix-permissions-commands:
+	@setfacl -dR -m u:$(id -u www-data):rwX var
+	@setfacl -R -m u:$(id -u www-data):rwX var
 
 build:
 	@docker-compose build --force-rm
